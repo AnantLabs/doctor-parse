@@ -20,15 +20,15 @@ namespace Dr.Parser
             this.operations = operations;
 
             pcProvider = (!string.IsNullOrEmpty(operations.Pacients)) ?
-                new PacientsProvider(operations.Pacients,operations.PacientsSettings) : null;
-            if ((pcProvider == null) && (pcProvider.Instance is IPacientCollection))
+                new PacientsProvider(operations.Pacients, operations.PacientsSettings) : null;
+            if ((pcProvider != null) && (pcProvider.Instance is IPacientCollection))
             {
-                
+
             }
 
             dbProvider = (!string.IsNullOrEmpty(operations.DataBase)) ?
-                new DataBaseProvider(operations.DataBase,operations.DataBaseSettings) : null;
-            if ((dbProvider == null) && (dbProvider.Instance is IDataBaseProvider))
+                new DataBaseProvider(operations.DataBase, operations.DataBaseSettings) : null;
+            if ((dbProvider != null) && (dbProvider.Instance is IDataBaseProvider))
             {
 
             }
@@ -54,7 +54,7 @@ namespace Dr.Parser
                 if ((operations.MinThreads > 1) && (operations.MinThreads < available))
                     if (ThreadPool.SetMinThreads(operations.MinThreads, completion))
                     {
-                        
+
                     }
 
                 ThreadPool.QueueUserWorkItem(_Callback, null);
@@ -88,7 +88,9 @@ namespace Dr.Parser
             }
         }
 
-#region Events of doctor
+
+        #region Events of doctor >
+
         private void OnException(DoctorExceptionArgs e)
         {
             Console.WriteLine(e.Message);
@@ -107,12 +109,13 @@ namespace Dr.Parser
             if (!e.File.Exists)
                 e.File.Create();
 
-            using(FileStream file = new FileStream(e.File.FullName,FileMode.Append))
+            using (FileStream file = new FileStream(e.File.FullName, FileMode.Append))
             {
                 byte[] buffer = Encoding.Default.GetBytes(e.Data);
                 file.Write(buffer, 0, buffer.Length);
             }
         }
-#endregion
+
+        #endregion
     }
 }

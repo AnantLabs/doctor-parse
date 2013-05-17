@@ -7,7 +7,7 @@ using Dr.Pacients;
 
 namespace Dr.Parser
 {
-    public class Operations : Settings 
+    public class Operations : Settings
     {
         List<YamlNode> m_Operations = new List<YamlNode>();
         public Operations(string source)
@@ -28,6 +28,7 @@ namespace Dr.Parser
                     reader.Close();
             }
         }
+
         public Operations(TextReader source)
         {
             try
@@ -44,6 +45,7 @@ namespace Dr.Parser
                     source.Close();
             }
         }
+
         public Operations(FileInfo source)
         {
             if (!source.Exists)
@@ -76,7 +78,7 @@ namespace Dr.Parser
         private void Parse(ref TextReader reader)
         {
             YamlNode node = null;
-            
+
             String sequence = string.Empty;
             String name = string.Empty;
             bool IsParametr = false;
@@ -87,10 +89,10 @@ namespace Dr.Parser
                 line.Remove(0, line.Length);
                 line.AppendLine(reader.ReadLine());
 
-                Match match = Regex.Match(line.ToString(),@"^(.*?):");
+                Match match = Regex.Match(line.ToString(), @"^(.*?):", RegexOptions.Compiled);
                 if (match.Success)
                 {
-                    name = match.Value.Replace(":", "").Trim();
+                    name = match.Value.Replace(":", string.Empty).Trim();
                     if ((match.Value.Substring(0, 1) != " ") && (match.Value.Substring(0, 1) != "-"))
                     {
                         sequence = name;
@@ -103,17 +105,17 @@ namespace Dr.Parser
                     if (name.Contains("-"))
                     {
                         IsParametr = true;
-                        node.Parameters.Add(name.Replace("-", "").Trim(), value.Trim());
+                        node.Parameters.Add(name.Replace("-", string.Empty).Trim(), value.Trim());
                     }
                     else
                     {
                         IsParametr = false;
                         node = new YamlNode(name);
                         node.Value = value.Trim();
-                         switch (sequence)
+                        switch (sequence)
                         {
                             case "Settings":
-                                m_Settings.Add(node.Name,node);
+                                m_Settings.Add(node.Name, node);
                                 break;
                             case "Operations":
                                 m_Operations.Add(node);
@@ -124,7 +126,7 @@ namespace Dr.Parser
                 else
                 {
                     if (IsParametr)
-                        node.Parameters[name.Replace("-", "").Trim()] += value;
+                        node.Parameters[name.Replace("-", string.Empty).Trim()] += value;
                     else
                         node.Value += value;
                 }

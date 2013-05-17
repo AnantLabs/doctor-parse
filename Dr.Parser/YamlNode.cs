@@ -32,8 +32,10 @@ namespace Dr.Parser
         public String Value
         {
             get { return m_Value; }
-            set { 
+            set
+            {
                 m_Value = value;
+
                 if (Regex.IsMatch(value, @"^\d+$"))
                     m_Type = typeof(System.Int32);
                 else if (Regex.IsMatch(value.ToLower(), @"^(on|of|no|yes|true|false)$"))

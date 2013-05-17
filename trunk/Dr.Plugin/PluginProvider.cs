@@ -25,30 +25,33 @@ namespace Dr.Plugin
 
         public bool PlugIn(string nspace, string type, Dictionary<string, string> settings)
         {
-            string dllPath = Path.Combine(Directory.GetCurrentDirectory(), nspace + "." + type + ".dll");
+            string dllPath = Path.Combine(Directory.GetCurrentDirectory(), string.Format("{0}.{1}.dll", nspace, type));
             if (File.Exists(dllPath))
             {
-                object InstanceSettings = PnP.CreateInstance(nspace + "." + type + "Settings", dllPath);
-                if (InstanceSettings != null)
+
+                object instanceSettings = PnP.CreateInstance(string.Format("{0}.{1}Settings", nspace, type), dllPath);
+                if (instanceSettings != null)
                 {
+
                     // Settings property
-                    PropertyInfo[] properties = InstanceSettings.GetType().GetProperties();
+                    PropertyInfo[] properties = instanceSettings.GetType().GetProperties();
                     foreach (PropertyInfo p in properties)
                     {
                         if (p.CanWrite)
                         {
                             if (p.PropertyType == typeof(System.String))
                             {
-                                p.SetValue(InstanceSettings, settings[p.Name].Trim(), null);
+                                p.SetValue(instanceSettings, settings[p.Name].Trim(), null);
                             }
                             else
                             {
-                                p.SetValue(InstanceSettings, Convert.ChangeType(settings[p.Name].Trim(), p.PropertyType), null);
+                                p.SetValue(instanceSettings, Convert.ChangeType(settings[p.Name].Trim(), p.PropertyType), null);
                             }
                         }
                     }
+
                     ///////////////////////////
-                    m_Instance = PnP.CreateInstance(nspace + "." + type, dllPath, new object[] { InstanceSettings });
+                    m_Instance = PnP.CreateInstance(string.Format("{0}.{1}", nspace, type), dllPath, new object[] { instanceSettings });
                     if (m_Instance != null)
                     {
                         InstanceType = m_Instance.GetType();

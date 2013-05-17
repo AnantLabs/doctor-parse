@@ -67,7 +67,7 @@ namespace Dr.Pacients
                         mPrevPacinet = mCurrentPacinet;
                         ////////////////////////////////////////////////////////////////
                         mCurrentPacinet = new Pacient();
-                        mCurrentPacinet.Name = ((FileInfo)mFiles[mFilesIndex]).FullName.Replace(Settings.Source,"");
+                        mCurrentPacinet.Name = ((FileInfo)mFiles[mFilesIndex]).FullName.Replace(Settings.Source, string.Empty);
                         ReadPacient(ref mCurrentPacinet);
                         return mCurrentPacinet;
                     }

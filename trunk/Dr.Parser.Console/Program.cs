@@ -12,6 +12,7 @@ namespace Dr.Parser.Console
     {
         static void Main(string[] args)
         {
+
 #if DEBUG
             Operations operations = new Operations(new FileInfo(Path.Combine(Directory.GetCurrentDirectory(),@"debug.yaml")));
 #else

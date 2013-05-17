@@ -15,35 +15,25 @@ namespace Dr.Parser
 
         public static void RegexOptionsParse(string list, ref RegexOptions options, ref bool IsFirstMatch)
         {
-            foreach (string _opt in list.Split('|'))
+            foreach (string value in list.Split('|'))
             {
-                switch (_opt.ToUpper().Trim())
+                // parse regex options
+                object option = Enum.Parse(typeof(RegexOptions), value, true);
+                if (option != null)
                 {
-                    case "IGNORECASE":
-                        {
-                            options |= RegexOptions.IgnoreCase;
-                        }
-                        break;
-                    case "IGNOREWHITESPACE":
-                        {
-                            options |= RegexOptions.IgnorePatternWhitespace;
-                        }
-                        break;
-                    case "SINGLELINE":
-                        {
-                            options |= RegexOptions.Singleline;
-                        }
-                        break;
-                    case "MULTILINE":
-                        {
-                            options |= RegexOptions.Multiline;
-                        }
-                        break;
-                    case "FIRSTMATCH":
-                        {
-                            IsFirstMatch = true;
-                        }
-                        break;
+                    options |= (RegexOptions)option;
+                }
+                else
+                {
+                    // other options
+                    switch (value.ToUpper().Trim())
+                    {
+                        case "FIRSTMATCH":
+                            {
+                                IsFirstMatch = true;
+                            }
+                            break;
+                    }
                 }
             }
         }

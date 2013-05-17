@@ -1,6 +1,13 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bin", "bin", "{E00E528C-A575-4ED2-94ED-9BE966CB2C36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{04DE3108-1054-4142-9FD6-6B724F2836B8}"
+	ProjectSection(SolutionItems) = preProject
+		bin\Debug\debug.yaml = bin\Debug\debug.yaml
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dr.Pacients.Directory", "Dr.Pacients.Directory\Dr.Pacients.Directory.csproj", "{ED2B219F-599C-49E6-A33D-21F659913985}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dr.Parser", "Dr.Parser\Dr.Parser.csproj", "{A8CE2F55-092C-4B07-B98A-5E47BA1F5E19}"
@@ -10,13 +17,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dr.DataBase.MSSQLServer", "Dr.DataBase.MSSQLServer\Dr.DataBase.MSSQLServer.csproj", "{7E387CF2-3951-4AC3-BDA1-DF2BB0BC28CD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dr.Plugin", "Dr.Plugin\Dr.Plugin.csproj", "{4526F6BC-91A9-4DA0-ADAF-B734434A1EF2}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bin", "bin", "{E00E528C-A575-4ED2-94ED-9BE966CB2C36}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{04DE3108-1054-4142-9FD6-6B724F2836B8}"
-	ProjectSection(SolutionItems) = preProject
-		bin\Debug\debug.yaml = bin\Debug\debug.yaml
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
